@@ -227,6 +227,7 @@ GAZE_BINS = 90
 GAZE_BINWIDTH = 4
 GAZE_ANGLE_OFFSET = 180
 GAZE_FRAME_STRIDE = int(os.getenv("GAZE_FRAME_STRIDE", "8"))
+ADHD_THRESHOLD = float(os.getenv("ADHD_THRESHOLD", "0.229"))
 
 STT_MODEL_NAME = os.getenv("STT_MODEL_NAME", "small.en")
 STT_BEAM_SIZE = int(os.getenv("STT_BEAM_SIZE", "1"))
@@ -363,8 +364,7 @@ async def adhd_diagnose(
     )
     variability = compute_gaze_variability(gaze_series)
 
-    ADHD_THRESHOLD = 0.229  # TODO: tune
-    adhd_result = "ADHD" if variability > ADHD_THRESHOLD else "No ADHD"
+    adhd_result = "ADHD" if variability >= ADHD_THRESHOLD else "No ADHD"
 
     # ---- Structured console logging for gaze output ----
     try:
@@ -395,6 +395,7 @@ async def adhd_diagnose(
         "adhd_gaze_variability": variability,
         "adhd_result": adhd_result,
         "num_gaze_frames": len(gaze_series),
+        "threshold_used": ADHD_THRESHOLD,
     }
 
 
