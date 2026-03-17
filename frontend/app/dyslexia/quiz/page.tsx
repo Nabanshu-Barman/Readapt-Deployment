@@ -12,9 +12,6 @@ type QuizOption = {
 }
 
 interface QuizQuestion {
-function getBackendBaseUrl() {
-  return (process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000").replace(/\/+$/, "")
-}
   index: number
   id: string
   typeLabel: string
@@ -24,6 +21,10 @@ function getBackendBaseUrl() {
   audioSrc?: string
   options: QuizOption[]
   constructs: string[]
+}
+
+function getBackendBaseUrl() {
+  return (process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000").replace(/\/+$/, "")
 }
 
 /* Question Set (UNCHANGED content / paths) */
