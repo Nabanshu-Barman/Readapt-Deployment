@@ -114,7 +114,7 @@ export default function ADHDQuizPage() {
             localStorage.setItem("readapt:adhdGazePoints", String(data.num_gaze_frames ?? ""))
             localStorage.setItem("readapt:adhdGazeVariability", String(data.adhd_gaze_variability ?? ""))
             localStorage.setItem("readapt:adhdGazeResult", String(data.adhd_result ?? ""))
-            localStorage.setItem("readapt:adhdThreshold", String(data.adhd_threshold ?? "0.23"))
+            localStorage.setItem("readapt:adhdThreshold", String(data.adhd_threshold ?? "0.229"))
 
             // We ignore data.quiz_class / data.final_class if absent.
             // Final class now determined on results page by rule:
