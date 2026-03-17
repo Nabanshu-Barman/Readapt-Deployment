@@ -359,7 +359,7 @@ async def adhd_diagnose(
     )
     variability = compute_gaze_variability(gaze_series)
 
-    ADHD_THRESHOLD = 0.248  # TODO: tune
+    ADHD_THRESHOLD = 0.229  # TODO: tune
     adhd_result = "ADHD" if variability > ADHD_THRESHOLD else "No ADHD"
 
     # ---- Structured console logging for gaze output ----
