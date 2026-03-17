@@ -24,7 +24,7 @@ const QUESTIONS: Q[] = [
 const LABELS = ["None", "Mild", "Moderate", "Severe"]
 
 function getBackendBaseUrl() {
-  return (process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000").replace(/\/+$/, "")
+  return "/api/backend"
 }
 
 /**
