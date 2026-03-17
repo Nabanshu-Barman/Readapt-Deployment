@@ -62,7 +62,7 @@ export default function ADHDDashboard() {
                 </li>
                 <li>Webcam video (consent) → sampled frames → 3D gaze (ResNet18 Gaze360 weights).</li>
                 <li>Classification logits → continuous angles (discretized bins + expectation).</li>
-                <li>Temporal gaze variability metric computed (heuristic threshold 0.248 rad ≈ 14°).</li>
+                <li>Temporal gaze variability metric computed (heuristic threshold 0.229 rad ≈ 13.1°).</li>
                 <li>Survey pattern + variability → class:
                   <ul className="adhd-bullets-nested">
                     <li>0: No ADHD</li>
@@ -132,7 +132,7 @@ export default function ADHDDashboard() {
               { t: "Sentence Chunking", d: "Extra spacing at higher presets for pacing." },
               { t: "TL;DR Summaries", d: "Optional quick context (preset ≥ 3)." },
               { t: "TTS Integration", d: "Preset 4 enables co‑reading audio." },
-              { t: "Gaze Variability", d: "Temporal angular dispersion heuristic (0.248 rad)." },
+              { t: "Gaze Variability", d: "Temporal angular dispersion heuristic (0.229 rad)." },
               { t: "Survey Fusion", d: "Inattention + hyperactive items guide class." },
               { t: "Custom Preset", d: "AI‑refined single stored configuration." },
               { t: "Browser Extension", d: "Applies adaptation across any site." },
