@@ -61,8 +61,7 @@ const CAPTURE_MS = 8_000
 const COOLDOWN_MS = 5 * 60_000
 
 function pickBackendUrl() {
-  // Prefer public env for client-side usage; fallback to localhost (keeps original quiz behavior stable).
-  return process.env.NEXT_PUBLIC_BACKEND_URL || process.env.BACKEND_URL || "http://localhost:8000"
+  return "/api/backend"
 }
 
 /* =========================================================
@@ -535,7 +534,7 @@ export default function ADHDAdaptPage() {
     form.append("video", new File([blob], "gaze.webm", { type: blob.type || "video/webm" }))
 
     try {
-      const res = await fetch(`${backend.replace(/\/$/, "")}/api/adhd-diagnose`, {
+      const res = await fetch(`${backend}/api/adhd-diagnose`, {
         method: "POST",
         body: form
       })
