@@ -91,7 +91,7 @@ const METRICS: Metric[] = [
   {
     key: "adhdResult",
     label: "Gaze Heuristic Result",
-    explain: "Binary threshold outcome (0.248 rad)",
+    explain: "Binary threshold outcome (0.229 rad)",
     getter: ({ adhdResult }) => adhdResult ?? "—"
   },
   {
@@ -255,7 +255,7 @@ export default function ADHDResultsPage() {
       `Quiz Class:               ${quizClass}`,
       `Gaze Frames:              ${gazePoints ?? "N/A"}`,
       `Gaze Variability (rad):   ${gazeVariability != null ? gazeVariability.toFixed(6) : "N/A"}`,
-      `Threshold (rad):          0.248000`,
+      `Threshold (rad):          0.229000`,
       `Gaze Heuristic Result:    ${adhdResult ?? "N/A"}`,
       `Classifier Tag:           ${adhdPrediction}`,
       `Computed Final Class:     ${finalClass}  (quiz ${quizClass} + ${adhdResult === "ADHD" ? "1" : "0"})`,
