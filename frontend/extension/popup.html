@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Readapt</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      --accent: #2563eb;
+      --accent-soft: #e5f0ff;
+      --danger: #dc2626;
+      --radius: 10px;
+      --bg: #ffffff;
+      --bg-alt: #f5f7fa;
+      --border: #d9e0e7;
+      --text: #1a2430;
+      --text-dim: #5a6676;
+      --shadow: 0 4px 12px -2px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #11161d;
+        --bg-alt: #1b2430;
+        --border: #2a3949;
+        --text: #f1f5f9;
+        --text-dim: #96a2b1;
+        --accent-soft: #1e3a5c;
+        --shadow: 0 4px 16px -2px rgba(0,0,0,0.7), 0 1px 2px rgba(0,0,0,0.5);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font: 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text);
+      background: var(--bg);
+      min-width: 320px;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrap {
+      padding: 14px 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 8px 4px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .brand {
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: .5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      background: var(--accent);
+      color: #fff;
+      padding: 3px 6px;
+      border-radius: 6px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .timestamp {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-align: right;
+      flex: 1;
+    }
+
+    .section {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px 14px;
+      position: relative;
+    }
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mode-toggle {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .seg {
+      flex: 1;
+      position: relative;
+    }
+    .seg input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .seg label {
+      display: block;
+      padding: 8px 8px 7px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text-dim);
+      user-select: none;
+      transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
+      cursor: pointer;
+    }
+    .seg input:checked + label {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25) inset;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    button {
+      font: inherit;
+      font-weight: 500;
+      letter-spacing: .3px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      transition: background .15s, border-color .15s, color .15s;
+    }
+    button:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+    button.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    button.primary:hover {
+      filter: brightness(1.07);
+    }
+    button.warning {
+      background: linear-gradient(90deg,#f87171,#ef4444);
+      color: #fff;
+      border-color: #dc2626;
+    }
+    button.warning:hover {
+      filter: brightness(1.08);
+    }
+
+    .settings-block {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 11px;
+      line-height: 1.35;
+      padding: 10px 11px;
+      max-height: 180px;
+      overflow: auto;
+      white-space: pre-wrap;
+      color: var(--text-dim);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-dim);
+      padding: 4px 0 10px;
+      user-select: none;
+    }
+    .no-settings {
+      font-size: 12px;
+      color: var(--text-dim);
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      padding: 10px 12px;
+      border-radius: 8px;
+    }
+
+    .mode-label-inline {
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      padding: 3px 6px;
+      border-radius: 6px;
+      line-height: 1;
+      display: none;
+    }
+    .mode-label-inline[data-visible="true"] {
+      display: inline-flex;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <span style="display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;
+          background:var(--accent);color:#fff;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.5px">R</span>
+        Readapt
+        <span id="inlineModeLabel" class="mode-label-inline" data-visible="false"></span>
+      </div>
+      <div class="timestamp" id="lastUpdated">—</div>
+    </header>
+
+    <div class="section" id="modeSection">
+      <h2>Apply Mode</h2>
+      <div class="mode-toggle" id="modeToggle">
+        <div class="seg">
+          <input type="radio" id="overlayMode" name="applyMode" value="overlay" checked />
+          <label for="overlayMode">Overlay</label>
+        </div>
+        <div class="seg">
+          <input type="radio" id="inlineMode" name="applyMode" value="inline" />
+          <label for="inlineMode">Inline</label>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text-dim);">
+        Overlay extracts the page content into a focused reader. Inline applies styles directly to the site.
+      </div>
+      <div class="actions" style="margin-top:10px;">
+        <button id="toggleDisable" class="warning" style="flex:1;">Disable on this site</button>
+      </div>
+    </div>
+
+    <div class="section" id="settingsSection">
+      <h2>
+        Current Settings
+        <span id="modeBadge" class="badge" style="display:none;"></span>
+      </h2>
+      <div id="settingsContainer">
+        <div id="settingsDump" class="settings-block">No settings cached.</div>
+        <div class="no-settings" id="noSettingsMsg" style="display:none;">
+          No cached adaptation yet.<br />Open an adapt page and click
+          <strong>Adapt in real time</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    Readapt Extension
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

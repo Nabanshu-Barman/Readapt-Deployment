@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Readapt Accessibility Adapter",
+  "version": "0.1.0",
+  "description": "Apply your Dyslexia / ADHD / Low Vision reading adaptations across the web.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["contentScript.js"],
+    "run_at": "document_idle"
+  }],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Readapt"
+  },
+  "web_accessible_resources": [{
+    "resources": [
+      "styles/overlay.css",
+      "styles/inline.css"
+    ],
+    "matches": ["<all_urls>"]
+  }]
+}

@@ -1,0 +1,151 @@
+/* Route-scoped styles for /login */
+
+/* Container + layered visuals */
+.login-shell {
+  isolation: isolate;
+  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  position: relative;
+}
+
+.login-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.25), transparent 60%),
+    radial-gradient(circle at 85% 80%, rgba(255,255,255,0.18), transparent 65%);
+  mix-blend-mode: overlay;
+  opacity: 0.9;
+}
+
+.glass-secondary {
+  background: linear-gradient(160deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08));
+}
+
+.abs-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 70% 20%, rgba(99,102,241,0.25), transparent 60%),
+    radial-gradient(circle at 35% 80%, rgba(14,165,233,0.25), transparent 65%);
+  filter: blur(28px);
+  opacity: 0.55;
+}
+
+/* Logo + aura */
+.logo-frame {
+  position: relative;
+  transition: transform 0.9s cubic-bezier(.22,1,.24,1);
+  perspective: 800px;
+}
+
+.logo-frame::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  padding: 3px;
+  border-radius: 34%;
+  background: linear-gradient(135deg,#3b82f6 0%,#6366f1 45%,#8b5cf6 70%,#0ea5e9 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: spinBorder 9s linear infinite;
+  opacity: 0.8;
+}
+
+.logo-aura {
+  position: absolute;
+  inset: 0;
+  border-radius: 40%;
+  background:
+    radial-gradient(circle at 55% 40%, rgba(255,255,255,0.55), transparent 70%),
+    radial-gradient(circle at 35% 75%, rgba(255,255,255,0.35), transparent 75%);
+  filter: blur(22px);
+  mix-blend-mode: plus-lighter;
+  opacity: 0.55;
+  transition: opacity .6s;
+}
+
+.logo-frame:hover .logo-aura { opacity: 0.8; }
+
+/* Sheen overlay */
+.sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,0.18) 45%, transparent 65%);
+  mix-blend-mode: overlay;
+  animation: sheenMove 12s ease-in-out infinite;
+  opacity: 0.4;
+}
+
+/* External drifting gradient layer */
+.grad-orb-layer {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 65% 25%, rgba(59,130,246,0.20), transparent 60%),
+    radial-gradient(circle at 35% 75%, rgba(99,102,241,0.18), transparent 65%);
+  animation: slowDrift 26s linear infinite;
+  opacity: 0.9;
+}
+
+/* (Removed .login-alt-btn styles – social buttons no longer used) */
+
+/* Animations */
+@keyframes fadePop {
+  0% { opacity: 0; transform: scale(.92) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes cardIn {
+  0% { opacity: 0; transform: translateY(28px) scale(.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(22px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes sheenMove {
+  0%, 100% { transform: translateX(-30%) rotate(0.001deg); }
+  50% { transform: translateX(30%) rotate(0.001deg); }
+}
+
+@keyframes spinBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes slowDrift {
+  0% { transform: translate3d(0,0,0) rotate(0deg); }
+  50% { transform: translate3d(2%, -2%, 0) rotate(180deg); }
+  100% { transform: translate3d(0,0,0) rotate(360deg); }
+}
+
+/* Removed shiftBg + .animate-shift-bg since the animated stripe background is gone */
+
+/* Utility animation classes */
+.animate-card-in { animation: cardIn .85s cubic-bezier(.22,1,.24,1) both; }
+.animate-slide-up { animation: slideUp .7s cubic-bezier(.22,1,.24,1) both; }
+.animate-fade-in { animation: fadePop .9s ease both; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-card-in,
+  .animate-slide-up,
+  .animate-fade-in,
+  .logo-frame,
+  .sheen,
+  .grad-orb-layer,
+  .logo-frame::after,
+  .logo-aura {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  .logo-frame::after,
+  .logo-aura { display: none; }
+}

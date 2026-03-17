@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+scikit-learn
+pandas
+numpy
+pydantic
+python-multipart
+opencv-python
+torch
+torchvision
+matplotlib
+uniface
+pytesseract
+Pillow
+faster-whisper
