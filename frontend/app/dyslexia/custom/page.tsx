@@ -305,14 +305,14 @@ export default function DyslexiaCustomPage() {
   }, []);
 
   const transcribeAudioBlob = useCallback(async (blob: Blob) => {
-    const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+    const backend = "/api/backend";
     setIsTranscribing(true);
     setMicError("");
     try {
       const formData = new FormData();
       formData.append("audio", blob, `mic-${Date.now()}.webm`);
       formData.append("language", "en");
-      const res = await fetch(`${backend.replace(/\/$/, "")}/api/transcribe`, {
+      const res = await fetch(`${backend}/api/transcribe`, {
         method: "POST",
         body: formData,
       });
