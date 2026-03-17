@@ -3,7 +3,7 @@
 /*
   Dev notes (Nabanshu): Added opt-in 60s monitoring window for ADHD Adapt page.
   - "Monitor me" starts a 60s window; we record one random 20s WEBM clip inside that window and POST to /api/adhd-diagnose.
-  - Thresholds: 0.248–<0.30 → suggest "Chunk text"; ≥0.30 → suggest "TL;DR".
+  - Thresholds: 0.229–<0.30 → suggest "Chunk text"; ≥0.30 → suggest "TL;DR".
   - After one suggestion popup, enforce a 5-minute cooldown (persisted). Clicking "Monitor me" again is allowed anytime.
   - Removed the previous 15s inactivity agent and its dialog as requested. All other functionality is unchanged.
 */
@@ -54,7 +54,7 @@ interface ReadaptSettingsADHD {
 /* =========================================================
    Gaze diagnose thresholds + helpers
 ========================================================= */
-const VAR_CHUNK_MIN = 0.248
+const VAR_CHUNK_MIN = 0.229
 const VAR_TLDR_MIN = 0.30
 const MONITOR_WINDOW_MS = 12_000
 const CAPTURE_MS = 8_000
